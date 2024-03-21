@@ -1,0 +1,16 @@
+Host *
+    ForwardAgent yes
+    ServerAliveInterval 300
+    ServerAliveCountMax 2
+    User ubuntu
+
+Host bastion
+    HostName 45.88.80.66
+
+Host master
+    HostName 192.168.13.106
+    ProxyJump bastion
+
+Host worker
+    HostName 192.168.13.80
+    ProxyJump bastion
