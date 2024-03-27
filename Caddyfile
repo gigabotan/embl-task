@@ -1,0 +1,6 @@
+embl.gigabotan.com {
+	reverse_proxy 192.168.13.106:80 192.168.13.80:80 {
+		health_uri /wp-admin/install.php
+		lb_try_duration 5s
+	}
+}

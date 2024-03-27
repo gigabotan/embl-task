@@ -21,7 +21,7 @@ Your aim is to configure a Kubernetes cluster using RKE2, consisting of one mast
 
 1. **Cluster Creation**: Utilising RKE2, set up a Kubernetes cluster comprising the provided VMs (1 master and 1 worker) beginning with version 1.27. Ensure that the cluster reaches a fully operational state, capable of executing kubectl commands successfully from the bastion node.
     
-2. **Application Deploymen**t: Deploy a WordPress application to your cluster. Detail all deployment steps, including any YAML configuration files used. Verify that the application is accessible and functioning by providing evidence of the WordPress website. Consider deploying any other tools you find necessary.
+2. **Application Deployment**: Deploy a WordPress application to your cluster. Detail all deployment steps, including any YAML configuration files used. Verify that the application is accessible and functioning by providing evidence of the WordPress website. Consider deploying any other tools you find necessary.
     
 3. [BONUS] **Cluster Upgrade**: Upgrade your Kubernetes cluster to version 1.28. Outline the upgrade procedure, aiming for minimal downtime, and make sure that the WordPress application remains active and functional before, during, and after the upgrade.
     
