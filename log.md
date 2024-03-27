@@ -1,8 +1,10 @@
 # Log
 
-> I was in the vacation at my hometown during last week and I had very unstable internet, so I implemented and tested everything first locally and then replicated on given infrastructure.
+> I was in the vacation at my hometown during last week and I had very unstable internet, so I implemented and tested everything first locally and then replicated everything on given infrastructure.
 > Sorry, last part of the log little bit chaotic, because it took longer than I expected and I had no time to do it properly.
 
+> Also, I have included all files and some screenshots in this repo, but some of them not referenced in this log, because I forgot or didn't have enought time to finish this log properly.
+> I will try to finish it as soon as possible even after the deadline and push updates to this repo.
 
 ## Preparation
 - **Read tasks carefully, check requirements and prepared infrastructure**
@@ -298,6 +300,8 @@ $ helm upgrade wordpress oci://registry-1.docker.io/bitnamicharts/wordpress --ve
 # Check web UI
 $ kubectl port-forward svc/wordpress 8080:80 -n wordpress
 # open browser on http://localhost:8080/
+```
+
 
 ## Prepare for kubernetes upgrade
 
@@ -325,8 +329,9 @@ $ kubectl port-forward svc/wordpress 8080:80 -n wordpress
    3. Install docker on bastion
    4. We will use caddy as LB
       1. Create caddyfile
-
-
+      2. Run caddy with docker compose
+   5. Turns out we have to enable `https`, because `gigabotan.com` domain is included in HSTS config in last versions of web-browsers.
+      1. Add my temporary Cloudflare token into caddy via .env file on bastion 
 
 
 
@@ -337,11 +342,13 @@ Important docs:
 - https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/
 
 
-0. Ensure HA 
+### Whole plan and log:
+
+1. Ensure HA 
    1. HA setup of the wordpress and database
    2. Longhorn
    3. DNS with 2 A records or external LB
-1. Upgrade master
+2. Upgrade master
    1. Drain node
    2. ```
       $ kubectl get nodes
@@ -359,11 +366,11 @@ Important docs:
    $ sudo systemctl restart rke2-server.service
    ```
       > Check if wordpress available during update
-   8. Uncordon node
-   9.  Wait for pods to be recreated on master node
+   6. Uncordon node
+   7.  Wait for pods to be recreated on master node
        1.  Actually I skipped this step because of time constraints, sorry
        2.  We can achieve graceful migration during next drain by using PodDisruptionBudgets
-2. Upgrade worker
+3. Upgrade worker
    1. Drain node
    2. Wait for pods to be terminated
    3. Wait for pods to be recreated on master node
